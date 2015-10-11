@@ -1,20 +1,103 @@
-import scala.collection.mutable.{Map => MutMap}
+import scala.collection.mutable.{Map => MutMap, Set => MutSet}
 
 object Dublicates {
   type Shingle = List[String]
+  type pBits = Array[Int]  //random permuted hash bits
+  def HammingDistance = 2
+  def bucketBits = 4
+  def p = 100 // # permutations
   
   def main(args: Array[String]) {
-    val duplicates = findDups(List("a rose is a rose is a rose","of all","the documents"))
+    val duplicates = findDups(List("a rose is a rose is a rose",
+        "a rose is a rose is a rose a","the documents","the documents","a rose"))
   }
   
   def findDups(docs: List[String]): Int = {
     val shingleDocs = docs.map(d => shingle(d,3))
     val simHashes = shingleDocs.map { x => simhash(x) }
-    println(simHashes)
+    
+    val permutations = createPermutations(p,bucketBits)
+    val bucketSize = 32*bucketBits   // bucket could exist of [bucketBits] times the same bit
+    
+    //initialize p empty buckets of size bucketSize
+    var buckets = Array.ofDim[MutSet[Int]](p,bucketSize)
+    for (i <- 0 to (p-1)) {
+      for (j <- 0 to (bucketSize-1)) {
+        buckets(i)(j) = MutSet[Int]()
+      }
+    }
+    
+    //hash into buckets and count duplicates
+    var duplicates = 0
+    var near = 0
+    for (docHash <- simHashes) {
+      val dupOrNear = hashDoc(docHash, permutations, buckets)
+      duplicates += dupOrNear._1;
+      near += dupOrNear._2;
+    }
+    println("exact duplicates: " + duplicates)
+    println("near duplicates: " + near)
     return 0
   }
   
+  def hashDoc(docHash: Int, permutations: Array[pBits], buckets: Array[Array[MutSet[Int]]]): (Int,Int) = {
+    // return (duplicates, near)
+    for (b <- 0 to (p-1)) {
+        val hashBits = permutations(b) // hash bits for bucket b
+        
+        var key: Int = 0 //select hashBits from docHash and create bucket index integer
+        for (i <- 0 to (bucketBits-1)) {
+          key = key | (((docHash>>hashBits(i)) & 1) << i)
+        }
+        
+        // hash into buckets(b)(key)
+        if (!buckets(b)(key).isEmpty){
+          // duplicate candidate(s) found -> check them completely
+          // exact and near compare
+          if (buckets(b)(key).contains(docHash)) {
+            return (1,0)
+          } else if (nearCheck(docHash,buckets(b)(key),HammingDistance)){
+            return (0,1)
+          } else {
+            buckets(b)(key).add(docHash)
+          }
+        } else {
+        buckets(b)(key).add(docHash)
+        }
+      }
+    return (0,0)
+  }
+  
+  def nearCheck(a: Int, s: MutSet[Int], hammingDistance: Int): Boolean = {
+    for (b <- s) {
+      var h = 0;
+      for(i <- 0 to 31) {
+        if ((((a>>i) ^ (b>>i)) & 1) == 1) {   // ^ = bitwiseXOR
+          h += 1
+          if (h > hammingDistance) {
+            return false
+          }
+        }
+      }
+    }
+    return true
+  }
+  
+  def createPermutations(k: Int, p: Int): Array[pBits] = {
+    val r = scala.util.Random
+    var perms = new Array[pBits](k)
+    for(i <- 0 to k-1) {
+      var ps = new pBits(p)
+      for(j <- 0 to p-1) {
+        ps(j) = r.nextInt(32) // could yield non distinct bit-array 
+      }
+      perms(i) = ps
+    }
+    perms
+  }
+  
   def simhash(shingleDoc: Set[Shingle]): Int = {
+    //see slide 40 lecture 2
     val simpleHashes = shingleDoc.map { x => x.hashCode() }
     var G = new Array[Int](32)    // Int size enough?
     simpleHashes.foreach { x => 

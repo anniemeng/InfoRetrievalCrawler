@@ -59,8 +59,8 @@ object Duplicates {
     val student = "student$"
     var count = 0
     for (d <- doc) {
-      d.filter(s => s.matches(student))
-      count += d.size
+      val new_d = d.filter(s => s.matches(student))
+      count += new_d.size
     }
     println("Term frequency of \"student\": " + count)
   }

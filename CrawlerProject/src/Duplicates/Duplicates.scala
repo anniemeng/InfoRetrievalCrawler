@@ -9,11 +9,6 @@ object Duplicates {
   def bucketBits = 4
   def p = 100 // # permutations
 
-  def main(args: Array[String]) {
-    val duplicates = findDups(List("a rose is a rose is a rose",
-      "a rose is a rose is a rose a","the documents","the documents","a rose"))
-  }
-
   def findDups(docs: List[String]): Int = {
     val shingleDocs = docs.map(d => shingle(d,3))
     val simHashes = shingleDocs.map { x => simhash(x) }

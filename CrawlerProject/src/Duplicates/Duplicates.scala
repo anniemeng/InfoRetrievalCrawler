@@ -1,6 +1,8 @@
 package Duplicates
 
 import scala.collection.mutable.{Map => MutMap, Set => MutSet}
+import org.jsoup.nodes.Document
+import scala.collection.JavaConversions._
 
 object Duplicates {
   type Shingle = List[String]
@@ -35,6 +37,12 @@ object Duplicates {
     println("exact duplicates: " + duplicates)
     println("near duplicates: " + near)
     return 0
+  }
+
+  def findStudent(doc: List[String]): Unit = {
+    val student = "student$"
+    doc.filter(s => s.matches(student))
+    println("Term frequency of \"student\": " + doc.size)
   }
 
   def hashDoc(docHash: Int, permutations: Array[pBits], buckets: Array[Array[MutSet[Int]]]): (Int,Int) = {
@@ -117,6 +125,8 @@ object Duplicates {
   }
 
   def shingle(doc: String, q: Int): Set[Shingle] = {
-    shingle(doc.split("[ .,;:?!\t\n\r\f]+").toList,q)
+    val docList = doc.split("[ .,;:?!\t\n\r\f]+").toList
+    findStudent(docList)
+    shingle(docList,q)
   }
 }

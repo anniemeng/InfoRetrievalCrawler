@@ -81,7 +81,8 @@ object Duplicates {
         // exact and near compare
         if (buckets(b)(key).contains(docHash)) {
           return (1,0)
-        } else if (nearCheck(docHash,buckets(b)(key),HammingDistance)){
+        } else if (!buckets(b)(key).forall { x => notNear(docHash,x,HammingDistance) }) {
+          buckets(b)(key).add(docHash)
           return (0,1)
         } else {
           buckets(b)(key).add(docHash)
@@ -93,19 +94,17 @@ object Duplicates {
     return (0,0)
   }
 
-  def nearCheck(a: Int, s: MutSet[Int], hammingDistance: Int): Boolean = {
-    for (b <- s) {
-      var h = 0
-      for(i <- 0 to 31) {
-        if ((((a>>i) ^ (b>>i)) & 1) == 1) {   // ^ = bitwiseXOR
-          h += 1
-          if (h > hammingDistance) {
-            return false
-          }
+  def notNear(a: Int, b: Int, hammingDistance: Int): Boolean = {
+    var h = 0
+    for(i <- 0 to 31) {
+      if ((((a>>i) ^ (b>>i)) & 1) == 1) {   // ^ = bitwiseXOR
+        h += 1
+        if (h > hammingDistance) {
+          return true
         }
       }
     }
-    return true
+    return false
   }
 
   def createPermutations(k: Int, p: Int): Array[pBits] = {

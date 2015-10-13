@@ -43,7 +43,7 @@ object Duplicates {
         output.add(docs(i))
       } else {
         fw.write(docs(i))
-        fw.write("\n********************")
+        fw.write("\n \n \n \n \n \n")
       }
     }
     fw.close()

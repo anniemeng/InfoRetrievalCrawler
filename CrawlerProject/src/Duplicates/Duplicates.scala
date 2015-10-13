@@ -1,5 +1,7 @@
 package Duplicates
 
+import java.io.FileWriter
+
 import scala.collection.mutable.{Map => MutMap, Set => MutSet}
 import org.jsoup.nodes.Document
 import scala.collection.JavaConversions._
@@ -11,7 +13,7 @@ object Duplicates {
   def bucketBits = 4
   def p = 100 // # permutations
 
-  def findDups(docs: List[String]): MutSet[List[String]] = {
+  def findDups(docs: List[String]): MutSet[String] = {
     val cleanDocs = docs.map(doc => doc.split("[ .,;:?!\t\n\r\f]+").toList)
     val shingleDocs = cleanDocs.map(d => shingle(d,3))
     val simHashes = shingleDocs.map { x => simhash(x) }
@@ -26,28 +28,40 @@ object Duplicates {
         buckets(i)(j) = MutSet[Int]()
       }
     }
-
+    val fw = new FileWriter("IgnoredUrls.txt",true)
     //hash into buckets and count duplicates
     var duplicates = 0
     var near = 0
     var uniqueDocSet = MutSet[List[String]]()
+    var output = MutSet[String]()
     for ( i <- 0 to (simHashes.length - 1)) {
       val dupOrNear = hashDoc(simHashes(i), permutations, buckets)
-      duplicates += dupOrNear._1;
-      near += dupOrNear._2;
+      duplicates += dupOrNear._1
+      near += dupOrNear._2
       if (dupOrNear._1 == 0 && dupOrNear._2 == 0) {
         uniqueDocSet.add(cleanDocs(i))
+        output.add(docs(i))
+        fw.write(docs(i))
+        fw.write("\n")
       }
     }
+    fw.close()
     println("Exact duplicates found: " + duplicates)
     println("Near duplicates found: " + near)
-    return uniqueDocSet
+
+    findStudent(uniqueDocSet)
+
+    return output
   }
 
-  def findStudent(doc: List[String]): Unit = {
+  def findStudent(doc: MutSet[List[String]]): Unit = {
     val student = "student$"
-    doc.filter(s => s.matches(student))
-    println("Term frequency of \"student\": " + doc.size)
+    var count = 0
+    for (d <- doc) {
+      d.filter(s => s.matches(student))
+      count += d.size
+    }
+    println("Term frequency of \"student\": " + count)
   }
 
   def hashDoc(docHash: Int, permutations: Array[pBits], buckets: Array[Array[MutSet[Int]]]): (Int,Int) = {
@@ -80,7 +94,7 @@ object Duplicates {
 
   def nearCheck(a: Int, s: MutSet[Int], hammingDistance: Int): Boolean = {
     for (b <- s) {
-      var h = 0;
+      var h = 0
       for(i <- 0 to 31) {
         if ((((a>>i) ^ (b>>i)) & 1) == 1) {   // ^ = bitwiseXOR
           h += 1

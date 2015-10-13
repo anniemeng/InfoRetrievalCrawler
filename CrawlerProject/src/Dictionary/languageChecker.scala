@@ -10,11 +10,11 @@ object languageChecker {
   val nGramNumber = 3
   def main(args : Array[String]) = {
     // for testing
-    checkLanguage(List("the Bachelor’s degree programmes begin in German",
-      "Das Bachelor-Studium beginnt auf Deutsch"))
+    /*checkLanguage(MutSet("the Bachelor’s degree programmes begin in German",
+      "Das Bachelor-Studium beginnt auf Deutsch"))*/
   }
 
-  def checkLanguage(documents: List[String]) {
+  def checkLanguage(documents: MutSet[String]) {
     // generate dictionary n-grams
     val fileEN = "engDictionary"
     val fileDE = "deDictionary"

@@ -9,7 +9,7 @@ object main {
     if (args.size != 1)
       throw new Exception("Provide starting URL")
     
-    val docs = crawler.start(args(0))
+    val docs = Crawler.getLinks(args(0))
     val uniqueDocs =  Duplicates.findDups(docs)
     languageChecker.checkLanguage(uniqueDocs)
 

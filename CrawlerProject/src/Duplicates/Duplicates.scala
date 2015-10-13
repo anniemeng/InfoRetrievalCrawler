@@ -11,7 +11,7 @@ object Duplicates {
   def bucketBits = 4
   def p = 100 // # permutations
 
-  def findDups(docs: List[String]): Int = {
+  def findDups(docs: List[String]): MutSet[String] = {
     val shingleDocs = docs.map(d => shingle(d,3))
     val simHashes = shingleDocs.map { x => simhash(x) }
 
@@ -29,14 +29,18 @@ object Duplicates {
     //hash into buckets and count duplicates
     var duplicates = 0
     var near = 0
-    for (docHash <- simHashes) {
-      val dupOrNear = hashDoc(docHash, permutations, buckets)
+    var uniqueDocList = MutSet[String]()
+    for ( i <- 0 to (simHashes.length - 1)) {
+      val dupOrNear = hashDoc(simHashes(i), permutations, buckets)
       duplicates += dupOrNear._1;
       near += dupOrNear._2;
+      if (dupOrNear._1 == 0 && dupOrNear._2 == 0) {
+        uniqueDocList.add(docs(i))
+      }
     }
-    println("exact duplicates: " + duplicates)
-    println("near duplicates: " + near)
-    return 0
+    println("Exact duplicates found: " + duplicates)
+    println("Near duplicates found: " + near)
+    return uniqueDocList
   }
 
   def findStudent(doc: List[String]): Unit = {

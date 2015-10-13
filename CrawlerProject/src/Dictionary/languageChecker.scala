@@ -9,7 +9,8 @@ import scala.math.log
 object languageChecker {
   val nGramNumber = 3
   def main(args : Array[String]) = {
-    checkLanguage(List())
+    checkLanguage(List("the Bachelor’s degree programmes begin in German",
+      "Das Bachelor-Studium beginnt auf Deutsch"))
   }
 
   def checkLanguage(documents: List[String]) {
@@ -24,16 +25,8 @@ object languageChecker {
     val normDictEn = normalizeDict(enDict)
     val normDictDe = normalizeDict(deDict)
 
-    var testStrings
-    if (documents.isEmpty) {
-      testStrings = List("the Bachelor’s degree programmes begin in German",
-        "Das Bachelor-Studium beginnt auf Deutsch")
-    } else {
-      testStrings = documents
-    }
-
     var numEnglish = 0
-    for (d <- testStrings) {
+    for (d <- documents) {
       val dGram = ngrams(d, nGramNumber)
       if (isEnglish(dGram.toMap, normDictEn, normDictDe)) {
         numEnglish += 1

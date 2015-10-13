@@ -11,8 +11,9 @@ object Duplicates {
   def bucketBits = 4
   def p = 100 // # permutations
 
-  def findDups(docs: List[String]): MutSet[String] = {
-    val shingleDocs = docs.map(d => shingle(d,3))
+  def findDups(docs: List[String]): MutSet[List[String]] = {
+    val cleanDocs = docs.map(doc => doc.split("[ .,;:?!\t\n\r\f]+").toList)
+    val shingleDocs = cleanDocs.map(d => shingle(d,3))
     val simHashes = shingleDocs.map { x => simhash(x) }
 
     val permutations = createPermutations(p,bucketBits)
@@ -29,18 +30,18 @@ object Duplicates {
     //hash into buckets and count duplicates
     var duplicates = 0
     var near = 0
-    var uniqueDocList = MutSet[String]()
+    var uniqueDocSet = MutSet[List[String]]()
     for ( i <- 0 to (simHashes.length - 1)) {
       val dupOrNear = hashDoc(simHashes(i), permutations, buckets)
       duplicates += dupOrNear._1;
       near += dupOrNear._2;
       if (dupOrNear._1 == 0 && dupOrNear._2 == 0) {
-        uniqueDocList.add(docs(i))
+        uniqueDocSet.add(cleanDocs(i))
       }
     }
     println("Exact duplicates found: " + duplicates)
     println("Near duplicates found: " + near)
-    return uniqueDocList
+    return uniqueDocSet
   }
 
   def findStudent(doc: List[String]): Unit = {
@@ -126,11 +127,5 @@ object Duplicates {
   def shingle(tks: List[String], q: Int): Set[Shingle] = {
     require(q>=1)
     tks.sliding(q).toSet
-  }
-
-  def shingle(doc: String, q: Int): Set[Shingle] = {
-    val docList = doc.split("[ .,;:?!\t\n\r\f]+").toList
-    findStudent(docList)
-    shingle(docList,q)
   }
 }

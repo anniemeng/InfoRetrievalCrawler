@@ -22,11 +22,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="generateDictionary.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="generateDictionary.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Dictionary/generateDictionary.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.61433446">
-              <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
@@ -34,11 +34,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="languageChecker.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="languageChecker.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Dictionary/languageChecker.scala">
           <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.2320819">
+              <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+              <folding>
+                <element signature="e#20#51#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="engDictionary" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Dictionary/engDictionary">
+          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -48,7 +60,7 @@
         <entry file="file://$PROJECT_DIR$/src/Duplicates/Duplicates.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="92" column="11" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="11" />
+              <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -77,8 +89,8 @@
         <option value="$PROJECT_DIR$/src/Dictionary/Dictionary.scala" />
         <option value="$PROJECT_DIR$/src/Dictionary/education-en.html" />
         <option value="$PROJECT_DIR$/src/Dictionary/generateDictionary.scala" />
-        <option value="$PROJECT_DIR$/src/Dictionary/languageChecker.scala" />
         <option value="$PROJECT_DIR$/src/Duplicates/Duplicates.scala" />
+        <option value="$PROJECT_DIR$/src/Dictionary/languageChecker.scala" />
       </list>
     </option>
   </component>
@@ -215,6 +227,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="bin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Duplicates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -649,7 +665,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
-          <folding />
+          <folding>
+            <element signature="e#20#51#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -675,7 +693,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
-          <folding />
+          <folding>
+            <element signature="e#20#51#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -701,7 +721,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#20#51#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -719,7 +741,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#20#51#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -737,7 +761,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#20#51#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -769,35 +795,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Dictionary/generateDictionary.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+          <folding>
+            <element signature="e#19#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Dictionary/engDictionary">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.8507463">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Duplicates/Duplicates.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="92" column="11" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="11" />
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Dictionary/languageChecker.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Dictionary/generateDictionary.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61433446">
-          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.2320819">
+          <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
           <folding>
-            <element signature="e#19#47#0" expanded="true" />
+            <element signature="e#20#51#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -2,7 +2,7 @@ package Duplicates
 
 import scala.collection.mutable.{Map => MutMap, Set => MutSet}
 
-object Dublicates {
+object Duplicates {
   type Shingle = List[String]
   type pBits = Array[Int]  //random permuted hash bits
   def HammingDistance = 2

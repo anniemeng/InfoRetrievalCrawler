@@ -24,11 +24,12 @@ object languageChecker {
     val normDictEn = normalizeDict(enDict)
     val normDictDe = normalizeDict(deDict)
 
+    var testStrings
     if (documents.isEmpty) {
-      val testStrings = List("the Bachelor’s degree programmes begin in German",
+      testStrings = List("the Bachelor’s degree programmes begin in German",
         "Das Bachelor-Studium beginnt auf Deutsch")
     } else {
-      val testStrings = documents
+      testStrings = documents
     }
 
     var numEnglish = 0

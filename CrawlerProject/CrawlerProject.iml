@@ -19,6 +19,6 @@
     <orderEntry type="library" name="scala-sdk-2.11.7" level="application" />
     <orderEntry type="library" name="com tinyir" level="project" />
     <orderEntry type="library" name="ch tinyir" level="project" />
-    <orderEntry type="library" name="jsoup-1.8.3" level="project" />
+    <orderEntry type="library" exported="" name="jsoup-1.8.3" level="project" />
   </component>
 </module>

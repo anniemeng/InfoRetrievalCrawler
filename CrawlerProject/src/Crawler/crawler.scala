@@ -9,7 +9,7 @@ import java.io._;
 
 object Crawler {
 
-  def getLinks(args: Array[String]) : List[String]{
+  def getLinks(args: Array[String]) : List[String] = {
     
     var linksSet = scala.collection.mutable.Set[String]();
     var textList = scala.collection.mutable.ListBuffer[String]();
@@ -70,7 +70,6 @@ object Crawler {
     if (ErrorFlag == 1)//404 page accounts as one URL
       uniqueURL = uniqueURL + 1;
     println("Number of Unique URLs found: %d",uniqueURL);
-    return textList;
-    
+    textList.toList
   }
 }

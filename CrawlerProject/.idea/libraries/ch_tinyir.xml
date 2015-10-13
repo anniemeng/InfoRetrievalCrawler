@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ch tinyir">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../tinyir.jar!/ch" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

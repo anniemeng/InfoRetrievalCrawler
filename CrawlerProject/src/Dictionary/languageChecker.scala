@@ -9,9 +9,6 @@ import scala.math.log
 object languageChecker {
   val nGramNumber = 3
   def main(args : Array[String]) = {
-    // for testing
-    /*checkLanguage(MutSet("the Bachelor’s degree programmes begin in German",
-      "Das Bachelor-Studium beginnt auf Deutsch"))*/
   }
 
   def checkLanguage(documents: MutSet[String]) {

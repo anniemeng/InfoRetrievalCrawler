@@ -22,7 +22,7 @@ object Duplicates {
     val bucketSize = 32*bucketBits   // bucket could exist of [bucketBits] times the same bit
 
     //initialize p empty buckets of size bucketSize
-    var buckets = Array.ofDim[MutSet[Int]](p,bucketSize)
+    val buckets = Array.ofDim[MutSet[Int]](p,bucketSize)
     for (i <- 0 to (p-1)) {
       for (j <- 0 to (bucketSize-1)) {
         buckets(i)(j) = MutSet[Int]()
@@ -32,8 +32,8 @@ object Duplicates {
     //hash into buckets and count duplicates
     var duplicates = 0
     var near = 0
-    var uniqueDocSet = MutSet[List[String]]()
-    var output = MutSet[String]()
+    val uniqueDocSet = MutSet[List[String]]()
+    val output = MutSet[String]()
     for ( i <- 0 to (simHashes.length - 1)) {
       val dupOrNear = hashDoc(simHashes(i), permutations, buckets)
       duplicates += dupOrNear._1
@@ -52,14 +52,14 @@ object Duplicates {
 
     findStudent(uniqueDocSet)
 
-    return output
+    output
   }
 
   def findStudent(doc: MutSet[List[String]]): Unit = {
     val student = "student$"
     var count = 0
     for (d <- doc) {
-      val new_d = d.filter(s => s.matches(student))
+      val new_d = d.filter(s => s.toLowerCase.matches(student))
       count += new_d.size
     }
     println("Term frequency of \"student\": " + count)
@@ -76,7 +76,7 @@ object Duplicates {
       }
 
       // hash into buckets(b)(key)
-      if (!buckets(b)(key).isEmpty){
+      if (buckets(b)(key).nonEmpty){
         // duplicate candidate(s) found -> check them completely
         // exact and near compare
         if (buckets(b)(key).contains(docHash)) {
@@ -91,7 +91,7 @@ object Duplicates {
         buckets(b)(key).add(docHash)
       }
     }
-    return (0,0)
+    (0,0)
   }
 
   def notNear(a: Int, b: Int, hammingDistance: Int): Boolean = {
@@ -104,14 +104,14 @@ object Duplicates {
         }
       }
     }
-    return false
+    false
   }
 
   def createPermutations(k: Int, p: Int): Array[pBits] = {
     val r = scala.util.Random
-    var perms = new Array[pBits](k)
+    val perms = new Array[pBits](k)
     for(i <- 0 to k-1) {
-      var ps = new pBits(p)
+      val ps = new pBits(p)
       for(j <- 0 to p-1) {
         ps(j) = r.nextInt(32) // could yield non distinct bit-array
       }
@@ -123,13 +123,12 @@ object Duplicates {
   def simhash(shingleDoc: Set[Shingle]): Int = {
     //see slide 40 lecture 2
     val simpleHashes = shingleDoc.map { x => x.hashCode() }
-    var G = new Array[Int](32)    // Int size enough?
+    val G = new Array[Int](32)    // Int size enough?
     simpleHashes.foreach { x =>
-      (
-        for(j <- 0 to 31) {
-          G(j) += 2*(x>>j & 1) - 1
-        }
-      )}
+      for(j <- 0 to 31) {
+        G(j) += 2*(x>>j & 1) - 1
+      }
+    }
 
     var simHash : Int = 0
     for (j <- 0 to 31) {

@@ -24,15 +24,14 @@ object Crawler {
       if (temp.matches("""^(http|https)://idvm-infk-hofmann03\.inf\.ethz\.ch/.*\.html$"""))
         linksSet += temp
     }
-    
-    var linksList = linksSet.toList
-    var linksQueue = scala.collection.mutable.Queue(linksList: _*)
+
+    val linksQueue = scala.collection.mutable.Queue(linksSet.toList: _*)
     var len = linksSet.size //Initial Number of Unique URL's
     var ErrorFlag = 0
     while(linksQueue.nonEmpty) {
-      var url = linksQueue.dequeue()
+      val url = linksQueue.dequeue()
       try {
-        var response : Connection.Response = Jsoup.connect(url).execute()
+        val response : Connection.Response = Jsoup.connect(url).execute()
         doc = response.parse()
         var text : String = doc.body().text()
         textList += text
@@ -43,26 +42,15 @@ object Crawler {
           str = str.replaceAll("\\?.*$","")
           if (str.matches("""^(http|https)://idvm-infk-hofmann03\.inf\.ethz\.ch/.*\.html$"""))
             linksSet += str
-          //writeToFile(str)
           if (linksSet.size > len) {// If the URL is new, enqueue it.
             linksQueue.enqueue(str)
             len = len + 1
           }
-          //else {
-          //  val fw = new FileWriter("IgnoredUrls.txt",true)
-          //  fw.write(str)
-          //  fw.write("\n")
-          //  fw.close()
-          //}
         }      
        }
        catch {
          case ex: IOException => {
            ErrorFlag = 1
-          //val fw = new FileWriter("Exceptions.txt",true)
-          //fw.write(url)
-          //fw.write("\n")
-          //fw.close()
          }
        }
     }

@@ -12,3 +12,8 @@ object main {
     languageChecker.checkLanguage(Duplicates.findDups(Crawler.getLinks(args(0))))
   }  
 }
+
+// 5470 pages
+// 100 exact dup
+// near: 1272 (1/128)
+// near: 1316 (2/ 128)

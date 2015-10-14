@@ -1,5 +1,6 @@
 package Duplicates
 
+import scala.math.pow
 import java.io.FileWriter
 
 import scala.collection.mutable.{Map => MutMap, Set => MutSet}
@@ -19,8 +20,8 @@ object Duplicates {
     val simHashes = shingleDocs.map { x => simhash(x) }
 
     val permutations = createPermutations(p,bucketBits)
-    val bucketSize = 32*bucketBits   // bucket could exist of [bucketBits] times the same bit
-
+    val bucketSize = pow(2,bucketBits).toInt   // bucket could exist of [bucketBits] times the same bit
+    
     //initialize p empty buckets of size bucketSize
     val buckets = Array.ofDim[MutSet[Int]](p,bucketSize)
     for (i <- 0 to (p-1)) {

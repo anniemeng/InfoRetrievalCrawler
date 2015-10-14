@@ -17,7 +17,7 @@ object Duplicates {
     val simHashes = shingleDocs.map { x => simhash(x) }
 
     val permutations = createPermutations(p,bucketBits)
-    val bucketSize = pow(2,bucketBits).toInt   // bucket could exist of [bucketBits] times the same bit
+    val bucketSize = pow(2,bucketBits).toInt
 
     //initialize p empty buckets of size bucketSize
     val buckets = Array.ofDim[MutSet[Int]](p,bucketSize)
@@ -61,7 +61,7 @@ object Duplicates {
   }
 
   def hashDoc(docHash: Int, permutations: Array[pBits], buckets: Array[Array[MutSet[Int]]]): (Int,Int) = {
-    // return (duplicates, near)
+    // returns (duplicates, near) false=0 true=1
     for (b <- 0 to (p-1)) {
       val hashBits = permutations(b) // hash bits for bucket b
 

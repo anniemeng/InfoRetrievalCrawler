@@ -1,5 +1,5 @@
 package Dictionary
-import java.io.{PrintWriter}
+import java.io.PrintWriter
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import scala.collection.JavaConversions._
@@ -8,12 +8,11 @@ object generateDictionary {
   def main(args : Array[String]) = {
     val fileEN = Jsoup.connect("http://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:52009DC0487&from=EN").get()
     val engDoc = obtainString(fileEN)
-    new PrintWriter("engDictionary") { write(engDoc); close }
+    new PrintWriter("engDictionary") { write(engDoc); close() }
 
     val fileDE = Jsoup.connect("http://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:52009DC0487&from=EN").get()
     val deDoc = obtainString(fileDE)
-    new PrintWriter("deDictionary") { write(deDoc); close }
-    println("finished")
+    new PrintWriter("deDictionary") { write(deDoc); close() }
   }
 
   def obtainString(doc: Document) : String = {

@@ -18,7 +18,7 @@ object Duplicates {
 
     val permutations = createPermutations(p,bucketBits)
     val bucketSize = pow(2,bucketBits).toInt   // bucket could exist of [bucketBits] times the same bit
-    
+
     //initialize p empty buckets of size bucketSize
     val buckets = Array.ofDim[MutSet[Int]](p,bucketSize)
     for (i <- 0 to (p-1)) {
@@ -117,7 +117,7 @@ object Duplicates {
   def simhash(shingleDoc: Set[Shingle]): Int = {
     //see slide 40 lecture 2
     val simpleHashes = shingleDoc.map { x => x.hashCode() }
-    val G = new Array[Int](32)    // Int size enough?
+    val G = new Array[Int](32)
     simpleHashes.foreach { x =>
       for(j <- 0 to 31) {
         G(j) += 2*(x>>j & 1) - 1

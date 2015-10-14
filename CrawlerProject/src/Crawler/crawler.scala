@@ -55,6 +55,7 @@ object Crawler {
            ErrorFlag = 1
        }
     }
+
     var uniqueURL = textList.size
     if (ErrorFlag == 1) //404 page accounts as one URL
       uniqueURL = uniqueURL + 1

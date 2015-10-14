@@ -1,9 +1,6 @@
 package Dictionary
 
-import scala.collection.mutable
 import scala.collection.mutable.{Map => MutMap,Set => MutSet}
-import java.io.{FileWriter, File}
-import scala.io.Source
 import scala.math.log
 
 object languageChecker {
@@ -28,7 +25,6 @@ object languageChecker {
       val dGram = ngrams(d, nGramNumber)
       if (isEnglish(dGram.toMap, normDictEn, normDictDe)) {
         numEnglish += 1
-        //println("is english: " + d)
       }
     }
 
@@ -57,20 +53,14 @@ object languageChecker {
     var sumEN = 0.0
     var sumDE = 0.0
     for (s <- grams.keySet) {
-      //println("s string:" + s)
       if (enDict.contains(s)) {
-        //println("s english val: " + log(enDict(s)))
         sumEN += log(enDict(s) * grams(s))
       }
       if (deDict.contains(s)) {
-        //println("s german val: " + log(deDict(s)))
         sumDE += log(deDict(s) * grams(s))
       }
     }
 
-    //println("sum english: " + sumEN)
-    //println("sum german: " + sumDE)
-    //println("\n \n")
     sumEN > sumDE
   }
 }

@@ -1,11 +1,8 @@
 package Duplicates
 
 import scala.math.pow
-import java.io.FileWriter
 
-import scala.collection.mutable.{Map => MutMap, Set => MutSet}
-import org.jsoup.nodes.Document
-import scala.collection.JavaConversions._
+import scala.collection.mutable.{Set => MutSet}
 
 object Duplicates {
   type Shingle = List[String]

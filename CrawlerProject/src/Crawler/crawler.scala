@@ -9,8 +9,8 @@ import java.io._
 object Crawler {
 
   def getLinks(s: String) : List[String] = {
-    var linksSet = scala.collection.mutable.Set[String]()
-    var textList = scala.collection.mutable.ListBuffer[String]()
+    var linksSet = mutable.Set[String]()
+    var textList = mutable.ListBuffer[String]()
    
     var doc : Document = Jsoup.connect(s).get()
     var links : Elements = doc.select("a[href]")
@@ -24,7 +24,7 @@ object Crawler {
         linksSet += temp
     }
 
-    val linksQueue = scala.collection.mutable.Queue(linksSet.toList: _*)
+    val linksQueue = mutable.Queue(linksSet.toList: _*)
     var len = linksSet.size //Initial Number of Unique URL's
     var ErrorFlag = 0 //404 pages
 

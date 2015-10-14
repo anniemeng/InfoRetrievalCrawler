@@ -8,7 +8,7 @@ import scala.collection.mutable.Queue
 import java.io._
 
 object Crawler {
-
+  //var enCount = 0
   def getLinks(s: String) : List[String] = {
     
     var linksSet = scala.collection.mutable.Set[String]()
@@ -21,7 +21,7 @@ object Crawler {
     while(iter.hasNext) {
       var temp : String = iter.next().attr("abs:href").replaceAll("\\#.*$", "")
       temp = temp.replaceAll("\\?.*$", "")
-      if (temp.matches("""^(http|https)://idvm-infk-hofmann03\.inf\.ethz\.ch/.*\.html$"""))
+      if (temp.matches("""^(http|https)://idvm-infk-hofmann03\.inf\.ethz\.ch/.*\.html$""") && !temp.contains("login"))
         linksSet += temp
     }
 
@@ -33,6 +33,7 @@ object Crawler {
       try {
         val response : Connection.Response = Jsoup.connect(url).execute()
         doc = response.parse()
+        //if (doc.select("html").first().attr("lang") == "en") enCount += 1
         var text : String = doc.body().text()
         textList += text
         links = doc.select("a[href]")
@@ -40,7 +41,7 @@ object Crawler {
         while(iter.hasNext) {//Iterate over all the URLs in the webpage
           var str : String =  iter.next().attr("abs:href").replaceAll("\\#.*$", "")
           str = str.replaceAll("\\?.*$","")
-          if (str.matches("""^(http|https)://idvm-infk-hofmann03\.inf\.ethz\.ch/.*\.html$"""))
+          if (str.matches("""^(http|https)://idvm-infk-hofmann03\.inf\.ethz\.ch/.*\.html$""") && !str.contains("login"))
             linksSet += str
           if (linksSet.size > len) {// If the URL is new, enqueue it.
             linksQueue.enqueue(str)
@@ -58,6 +59,7 @@ object Crawler {
     if (ErrorFlag == 1)//404 page accounts as one URL
       uniqueURL = uniqueURL + 1
     println("Number of Unique URLs found: " + uniqueURL)
+    //println("english: " + enCount)
     textList.toList
   }
 }

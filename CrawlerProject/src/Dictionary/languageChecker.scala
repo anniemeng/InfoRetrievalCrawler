@@ -2,7 +2,7 @@ package Dictionary
 
 import scala.collection.mutable
 import scala.collection.mutable.{Map => MutMap,Set => MutSet}
-import java.io.File
+import java.io.{FileWriter, File}
 import scala.io.Source
 import scala.math.log
 
@@ -70,6 +70,7 @@ object languageChecker {
 
     //println("sum english: " + sumEN)
     //println("sum german: " + sumDE)
+    //println("\n \n")
     sumEN > sumDE
   }
 }

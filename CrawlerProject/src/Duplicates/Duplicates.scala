@@ -83,7 +83,6 @@ object Duplicates {
         if (buckets(b)(key).contains(docHash)) {
           return (1,0)
         } else if (!buckets(b)(key).forall { x => notNear(docHash,x,HammingDistance) }) {
-          buckets(b)(key).add(docHash)
           return (0,1)
         } else {
           buckets(b)(key).add(docHash)

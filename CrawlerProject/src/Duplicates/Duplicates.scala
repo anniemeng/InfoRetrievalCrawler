@@ -10,8 +10,8 @@ object Duplicates {
   type Shingle = List[String]
   type pBits = Array[Int]  //random permuted hash bits
   def HammingDistance = 2
-  def bucketBits = 3
-  def p = 50 // # permutations
+  def bucketBits = 4
+  def p = 100 // # permutations
 
   def findDups(docs: List[String]): MutSet[String] = {
     val cleanDocs = docs.map(doc => doc.split("[ .,;:?!\t\n\r\f]+").toList)
@@ -34,7 +34,7 @@ object Duplicates {
     var near = 0
     val uniqueDocSet = MutSet[List[String]]()
     val output = MutSet[String]()
-    for ( i <- 0 to (simHashes.length - 1)) {
+    for ( i <- simHashes.indices) {
       val dupOrNear = hashDoc(simHashes(i), permutations, buckets)
       duplicates += dupOrNear._1
       near += dupOrNear._2

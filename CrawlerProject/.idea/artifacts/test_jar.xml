@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="test:jar">
+    <output-path>$PROJECT_DIR$</output-path>
+    <root id="archive" name="CrawlerProject.jar">
+      <element id="module-output" name="ir-2015-code1-12" />
+      <element id="extracted-dir" path="/usr/local/opt/scala/idea/lib/scala-actors-2.11.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/local/opt/scala/idea/lib/scala-actors-migration_2.11-1.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/local/opt/scala/idea/lib/scala-library.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/local/opt/scala/idea/lib/scala-parser-combinators_2.11-1.0.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/local/opt/scala/idea/lib/scala-reflect.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/local/opt/scala/idea/lib/scala-swing_2.11-1.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/local/opt/scala/idea/lib/scala-xml_2.11-1.0.4.jar" path-in-jar="/" />
+      <element id="library" level="project" name="com tinyir" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/jsoup-1.8.3.jar" path-in-jar="/" />
+      <element id="library" level="project" name="ch tinyir" />
+    </root>
+  </artifact>
+</component>

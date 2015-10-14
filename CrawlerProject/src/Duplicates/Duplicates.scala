@@ -26,7 +26,7 @@ object Duplicates {
         buckets(i)(j) = MutSet[Int]()
       }
     }
-    //val fw = new FileWriter("nearUrls.txt",true)
+
     //hash into buckets and count duplicates
     var duplicates = 0
     var near = 0
@@ -39,12 +39,9 @@ object Duplicates {
       if (dupOrNear._1 == 0 && dupOrNear._2 == 0) {
         uniqueDocSet.add(cleanDocs(i))
         output.add(docs(i))
-      } else {
-        //fw.write(docs(i))
-        //fw.write("\n \n \n \n \n \n")
       }
     }
-    //fw.close()
+
     println("Exact duplicates found: " + duplicates)
     println("Near duplicates found: " + near)
 

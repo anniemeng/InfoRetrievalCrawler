@@ -10,8 +10,8 @@ object Duplicates {
   type Shingle = List[String]
   type pBits = Array[Int]  //random permuted hash bits
   def HammingDistance = 2
-  def bucketBits = 4
-  def p = 100 // # permutations
+  def bucketBits = 3
+  def p = 50 // # permutations
 
   def findDups(docs: List[String]): MutSet[String] = {
     val cleanDocs = docs.map(doc => doc.split("[ .,;:?!\t\n\r\f]+").toList)
@@ -28,7 +28,7 @@ object Duplicates {
         buckets(i)(j) = MutSet[Int]()
       }
     }
-    val fw = new FileWriter("nearUrls.txt",true)
+    //val fw = new FileWriter("nearUrls.txt",true)
     //hash into buckets and count duplicates
     var duplicates = 0
     var near = 0
@@ -42,11 +42,11 @@ object Duplicates {
         uniqueDocSet.add(cleanDocs(i))
         output.add(docs(i))
       } else {
-        fw.write(docs(i))
-        fw.write("\n \n \n \n \n \n")
+        //fw.write(docs(i))
+        //fw.write("\n \n \n \n \n \n")
       }
     }
-    fw.close()
+    //fw.close()
     println("Exact duplicates found: " + duplicates)
     println("Near duplicates found: " + near)
 
@@ -129,7 +129,7 @@ object Duplicates {
         for(j <- 0 to 31) {
           G(j) += 2*(x>>j & 1) - 1
         }
-        )}
+      )}
 
     var simHash : Int = 0
     for (j <- 0 to 31) {

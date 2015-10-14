@@ -8,10 +8,7 @@ object main {
   def main(args: Array[String]) = {
     if (args.size != 1)
       throw new Exception("Provide starting URL")
-    
-    val docs = Crawler.getLinks(args(0))
-    val uniqueDocs =  Duplicates.findDups(docs)
-    languageChecker.checkLanguage(uniqueDocs)
 
+    languageChecker.checkLanguage(Duplicates.findDups(Crawler.getLinks(args(0))))
   }  
 }

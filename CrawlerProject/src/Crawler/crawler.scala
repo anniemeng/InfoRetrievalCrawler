@@ -18,7 +18,7 @@ object Crawler {
     var links : Elements = doc.select("a[href]")
     val iter = links.iterator()
     
-    while(iter.hasNext()) {
+    while(iter.hasNext) {
       var temp : String = iter.next().attr("abs:href").replaceAll("\\#.*$", "")
       temp = temp.replaceAll("\\?.*$", "")
       if (temp.matches("""^(http|https)://idvm-infk-hofmann03\.inf\.ethz\.ch/.*\.html$"""))
@@ -29,7 +29,7 @@ object Crawler {
     var linksQueue = scala.collection.mutable.Queue(linksList: _*)
     var len = linksSet.size //Initial Number of Unique URL's
     var ErrorFlag = 0
-    while(linksQueue.size != 0) {
+    while(linksQueue.nonEmpty) {
       var url = linksQueue.dequeue()
       try {
         var response : Connection.Response = Jsoup.connect(url).execute()
@@ -38,7 +38,7 @@ object Crawler {
         textList += text
         links = doc.select("a[href]")
         val iter = links.iterator()
-        while(iter.hasNext()) {//Iterate over all the URLs in the webpage
+        while(iter.hasNext) {//Iterate over all the URLs in the webpage
           var str : String =  iter.next().attr("abs:href").replaceAll("\\#.*$", "")
           str = str.replaceAll("\\?.*$","")
           if (str.matches("""^(http|https)://idvm-infk-hofmann03\.inf\.ethz\.ch/.*\.html$"""))
